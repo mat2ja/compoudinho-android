@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Compoundinho</string>
+    <string name="starting_amount">Starting amount ($)</string>
+    <string name="interestRate">Interest rate (%)</string>
+    <string name="investment_years">Years to invest</string>
+    <string name="total">Total</string>
+    <string name="calculate">Calculate</string>
+</resources>

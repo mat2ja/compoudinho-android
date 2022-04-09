@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Compoundinho</string>
+    <string name="starting_amount">Početno ulaganje ($)</string>
+    <string name="interestRate">Kamatna stopa (%)</string>
+    <string name="investment_years">Godine ulaganja</string>
+    <string name="total">Ukupno</string>
+    <string name="calculate">Izračunaj</string>
+</resources>
