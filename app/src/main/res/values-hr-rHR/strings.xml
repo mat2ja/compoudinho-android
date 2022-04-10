@@ -12,4 +12,5 @@
     <string name="years_positive">Godine moraju biti pozitivne</string>
     <string name="invalid_calc_msg">Molimo popunite sva obavezna polja</string>
     <string name="text_size">Veličina teksta</string>
+    <string name="dark_mode">Tamni način rada</string>
 </resources>

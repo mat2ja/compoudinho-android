@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -19,15 +20,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            >
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputStartingAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "@string/starting_amount"
-                android:inputType="number"/>
+                android:hint="@string/starting_amount"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -58,19 +58,37 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/calculationTotal"
-            style="@style/FontSizeLarge"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:fontFamily="sans-serif-black"
-            android:text="@string/total"
-            android:textAlignment="textEnd" />
+            android:layout_height="80dp"
+            >
+
+            <TextView
+                android:id="@+id/calculationTotalLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                style="@style/FontSizeLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/calculationTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="?"
+                style="@style/FontSizeLarge"
+                android:textAlignment="gravity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="4dp"
             app:contentPadding="16dp">
 
@@ -97,6 +115,12 @@
 
         </androidx.cardview.widget.CardView>
 
+        <Switch
+            android:id="@+id/darkModeSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dark_mode" />
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -115,7 +139,7 @@
             android:onClick="calculateInvestment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_media_play"
+            app:srcCompat="@android:drawable/ic_menu_send"
             tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

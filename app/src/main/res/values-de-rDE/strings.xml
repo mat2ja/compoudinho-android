@@ -1,3 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="starting_amount">Startbetrag ($)</string>
+    <string name="interestRate">Zinssatz (%)</string>
+    <string name="investment_years">Jahre zu investieren</string>
+    <string name="total">gesamt</string>
+    <string name="calculate">Berechnung</string>
+    <string name="starting_amount_required">Startbetrag ist erforderlich</string>
+    <string name="starting_amount_positive">Der Startbetrag muss positiv sein</string>
+    <string name="interest_rate_required">Zinssatz ist erforderlich</string>
+    <string name="years_required">Jahre erforderlich</string>
+    <string name="years_positive">Jahre müssen positiv sein</string>
+    <string name="invalid_calc_msg">Bitte füllen Sie alle geforderten Felder aus</string>
+    <string name="text_size">Textgröße</string>
+    <string name="dark_mode">Dunkler Modus</string>
 </resources>

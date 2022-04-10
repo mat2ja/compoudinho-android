@@ -1,11 +1,13 @@
 package android.tvz.hr.kalkulatorosrecki
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.tvz.hr.kalkulatorosrecki.databinding.ActivityMainBinding
 import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import java.text.DecimalFormat
 import kotlin.math.pow
 
@@ -25,30 +27,33 @@ class MainActivity : AppCompatActivity() {
                 calculateInvestment(view)
             }
 
-            textSizeSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                    val texzSize = when (progress) {
-                        0 -> R.style.FontSizeXSmall
-                        1 -> R.style.FontSizeSmall
-                        2 -> R.style.FontSizeMedium
-                        3 -> R.style.FontSizeLarge
-                        4 -> R.style.FontSizeXLarge
-                        else -> R.style.FontSizeMedium
-                    }
-                    calculationTotal.setTextAppearance(this@MainActivity, texzSize)
-                }
+            setTheme()
 
-                override fun onStartTrackingTouch(p0: SeekBar?) {
-                }
-
-                override fun onStopTrackingTouch(p0: SeekBar?) {
-                }
-            })
+            setTextSizeProgressBar()
         }
+    }
+
+    private fun ActivityMainBinding.setTheme() {
+        val mode =
+            applicationContext?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
+        when (mode) {
+            Configuration.UI_MODE_NIGHT_YES -> {}
+            Configuration.UI_MODE_NIGHT_NO -> {}
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
+        }
+
+        val isNightMode = mode == Configuration.UI_MODE_NIGHT_YES
+        darkModeSwitch.isChecked = isNightMode
+
+        darkModeSwitch.setOnClickListener(
+            View.OnClickListener {
+                if (darkModeSwitch.isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
+        )
     }
 
 
@@ -68,6 +73,35 @@ class MainActivity : AppCompatActivity() {
             calculationTotal.text = "$$total"
         }
     }
+
+
+    private fun ActivityMainBinding.setTextSizeProgressBar() {
+        textSizeSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(
+                seekBar: SeekBar?,
+                progress: Int,
+                fromUser: Boolean
+            ) {
+                val texzSize = when (progress) {
+                    0 -> R.style.FontSizeXSmall
+                    1 -> R.style.FontSizeSmall
+                    2 -> R.style.FontSizeMedium
+                    3 -> R.style.FontSizeLarge
+                    4 -> R.style.FontSizeXLarge
+                    else -> R.style.FontSizeMedium
+                }
+                calculationTotal.setTextAppearance(this@MainActivity, texzSize)
+                calculationTotalLabel.setTextAppearance(this@MainActivity, texzSize)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
+    }
+
 
     private fun calcCompoundInterest(P: Double, r: Double, t: Int, n: Int = 1): Double {
         return P * (1 + r / n).pow((n * t).toDouble())
