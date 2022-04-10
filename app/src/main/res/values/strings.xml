@@ -1,8 +1,16 @@
 <resources>
-    <string name="app_name">Compoundinho</string>
+    <string name="app_name" translatable="false">KalkulatorOsrecki</string>
     <string name="starting_amount">Starting amount ($)</string>
     <string name="interestRate">Interest rate (%)</string>
     <string name="investment_years">Years to invest</string>
     <string name="total">Total</string>
     <string name="calculate">Calculate</string>
+    <string name="starting_amount_required">Starting amount is required</string>
+    <string name="starting_amount_positive">Starting amount must be positive</string>
+    <string name="interest_rate_required">Interest rate is required</string>
+    <string name="years_required">Years is required</string>
+    <string name="years_positive">Years must be positive</string>
+    <string name="successful_calc_msg" translatable="false">Mo Money, Mo Problems</string>
+    <string name="invalid_calc_msg">Please fill in all required fields</string>
+    <string name="text_size">Text size</string>
 </resources>

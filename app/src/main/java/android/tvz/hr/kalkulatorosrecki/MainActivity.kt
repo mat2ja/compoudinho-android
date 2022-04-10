@@ -1,14 +1,13 @@
 package android.tvz.hr.kalkulatorosrecki
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.tvz.hr.kalkulatorosrecki.databinding.ActivityMainBinding
 import android.view.View
+import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import java.text.DecimalFormat
 import kotlin.math.pow
-import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -19,10 +18,36 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.inputYears.setText(10.toString())
+        binding.apply {
+            inputYears.setText(10.toString())
 
-        binding.buttonCalculate.setOnClickListener {
-            calculateInvestment(view)
+            buttonCalculate.setOnClickListener {
+                calculateInvestment(view)
+            }
+
+            textSizeSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    val texzSize = when (progress) {
+                        0 -> R.style.FontSizeXSmall
+                        1 -> R.style.FontSizeSmall
+                        2 -> R.style.FontSizeMedium
+                        3 -> R.style.FontSizeLarge
+                        4 -> R.style.FontSizeXLarge
+                        else -> R.style.FontSizeMedium
+                    }
+                    calculationTotal.setTextAppearance(this@MainActivity, texzSize)
+                }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {
+                }
+            })
         }
     }
 
@@ -31,15 +56,17 @@ class MainActivity : AppCompatActivity() {
 
         if (!validateInputs()) return
 
-        val startingAmount = binding.inputStartingAmount.text.toString().toDouble()
-        val years = binding.inputYears.text.toString().toInt()
-        val interestRate = binding.inputInterestRate.text.toString().toDouble()
+        binding.apply {
+            val startingAmount = inputStartingAmount.text.toString().toDouble()
+            val years = inputYears.text.toString().toInt()
+            val interestRate = inputInterestRate.text.toString().toDouble()
 
 
-        val df = DecimalFormat("#,###.##")
-        val total = df.format(calcCompoundInterest(startingAmount, interestRate / 100, years))
+            val df = DecimalFormat("#,###.##")
+            val total = df.format(calcCompoundInterest(startingAmount, interestRate / 100, years))
 
-        binding.calculationTotal.text = "$$total"
+            calculationTotal.text = "$$total"
+        }
     }
 
     private fun calcCompoundInterest(P: Double, r: Double, t: Int, n: Int = 1): Double {
@@ -50,43 +77,53 @@ class MainActivity : AppCompatActivity() {
         resetErrors();
 
         var valid = true
-        if (binding.inputStartingAmount.text.toString().isEmpty()) {
-            binding.inputStartingAmount.error = "Starting amount is required"
-            valid = false
-        } else if (binding.inputStartingAmount.text.toString().toDouble() < 0) {
-            binding.inputStartingAmount.error = "Starting amount must be positive"
-            valid = false
-        }
-
-        if (binding.inputInterestRate.text.toString().isEmpty()) {
-            binding.inputInterestRate.error = "Interest rate is required"
+        binding.apply {
+            if (inputStartingAmount.text.toString().isEmpty()) {
+                inputStartingAmount.error = getString(R.string.starting_amount_required)
                 valid = false
-        }
+            } else if (inputStartingAmount.text.toString().toDouble() < 0) {
+                inputStartingAmount.error = getString(R.string.starting_amount_positive)
+                valid = false
+            }
 
-        if (binding.inputYears.text.toString().isEmpty()) {
-            binding.inputYears.error = "Years is required"
-            valid = false
-        } else if (binding.inputYears.text.toString().toInt() < 0) {
-            binding.inputYears.error = "Years must be positive"
-            valid = false
+            if (inputInterestRate.text.toString().isEmpty()) {
+                inputInterestRate.error = getString(R.string.interest_rate_required)
+                valid = false
+            }
+
+            if (inputYears.text.toString().isEmpty()) {
+                inputYears.error = getString(R.string.years_required)
+                valid = false
+            } else if (inputYears.text.toString().toInt() < 0) {
+                inputYears.error = getString(R.string.years_positive)
+                valid = false
+            }
         }
 
         if (!valid) {
-            Toast.makeText(applicationContext, "Please fill in all required fields", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                applicationContext,
+                getString(R.string.invalid_calc_msg),
+                Toast.LENGTH_LONG
+            ).show()
         } else {
-            Toast.makeText(applicationContext, "Mo Money, Mo Problems", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                applicationContext,
+                getString(R.string.successful_calc_msg),
+                Toast.LENGTH_LONG
+            ).show()
         }
 
-        println("valid: $valid")
         return valid
     }
 
 
     private fun resetErrors() {
-        binding.inputStartingAmount.error = null
-        binding.inputInterestRate.error = null
-        binding.inputYears.error = null
-        binding.calculationTotal.text = resources.getString(R.string.total)
+        binding.apply {
+            inputStartingAmount.error = null
+            inputInterestRate.error = null
+            inputYears.error = null
+        }
     }
 
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="starting_amount">Početno ulaganje ($)</string>
+    <string name="interestRate">Kamatna stopa (%)</string>
+    <string name="investment_years">Godine ulaganja</string>
+    <string name="total">Ukupno</string>
+    <string name="calculate">Izračunaj</string>
+    <string name="starting_amount_required">Početni iznos je obavezan</string>
+    <string name="starting_amount_positive">Početni iznos mora biti pozitivan</string>
+    <string name="interest_rate_required">Kamatna stopa je obavezna</string>
+    <string name="years_required">Godine su obavezne</string>
+    <string name="years_positive">Godine moraju biti pozitivne</string>
+    <string name="invalid_calc_msg">Molimo popunite sva obavezna polja</string>
+    <string name="text_size">Veličina teksta</string>
+</resources>
