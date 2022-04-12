@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">KalkulatorOsrecki</string>
+    <string name="app_name" translatable="false">Compoundinho</string>
     <string name="starting_amount">Starting amount ($)</string>
     <string name="interestRate">Interest rate (%)</string>
     <string name="investment_years">Years to invest</string>
